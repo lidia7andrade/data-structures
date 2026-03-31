@@ -8,7 +8,11 @@ class Stack {
       this.items.push(item)
     }
     pop() {
-      this.items.pop();
+      // this.items.pop();
+
+      // FIX - return an element
+      if(this.isEmpty()) return null;
+      return this.items.pop();
     }
     peek() {
       const lastIndex = this.items.length - 1
