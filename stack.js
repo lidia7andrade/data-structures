@@ -49,7 +49,10 @@ class Stack {
         }
       }
     }
-    return isValid;
+    // return isValid;
+
+    // Fix - check if the stack is empty
+    return isValid && openSymbolsStack.isEmpty();
   }
   
   const history = new Stack();
