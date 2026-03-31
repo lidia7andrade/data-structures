@@ -40,6 +40,11 @@ class Stack {
       if(openSymbols.includes(symbol)) {
         openSymbolsStack.push(symbol);
       } else if(closeSymbols.includes(symbol)) {
+        // Fix - add an extra validation
+        if(openSymbolsStack.isEmpty()) {
+          isValid = false;
+          break;
+        }
         const pairOfSymbols = openSymbolsStack.peek() + symbol;
         if(!openAndCloseSymbols.includes(pairOfSymbols)) {
           isValid = false;
