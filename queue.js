@@ -22,6 +22,42 @@ class Queue {
     }
 }
 
+class AIQueue {
+    constructor() {
+        this.items = {};
+        this.front = 0;
+        this.rear = 0;
+    }
+
+    enqueue(item) {
+        this.items[this.rear] = item;
+        this.rear++;
+    }
+
+    dequeue() {
+        if(this.isEmpty()) return null;
+
+        const item = this.items[this.front];
+        delete this.items[this.front];
+        this.front++;
+
+        return item;
+    }
+
+    peek() {
+        if(this.isEmpty()) return null;
+        return this.items[this.front];
+    }
+
+    isEmpty() {
+        return this.rear === this.front;
+    }
+
+    size() {
+        return this.rear - this.front;
+    }
+}
+
 function toastNotifications() {
     const messageQueue = new Queue();
     function addNotification(message) {
