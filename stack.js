@@ -60,6 +60,7 @@ class Stack {
     return isValid && openSymbolsStack.isEmpty();
   }
   
+  // Act as back button in navigation
   const history = new Stack();
   history.push('home');
   history.push('about');
