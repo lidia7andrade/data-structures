@@ -59,6 +59,29 @@ class Stack {
     // Fix - check if the stack is empty
     return isValid && openSymbolsStack.isEmpty();
   }
+
+  // AI-anhanced isValid function
+  function isValidByAI(str = '') {
+    const stack = new Stack();
+    const map = {
+      ')': '(',
+      '}': '{',
+      ']': '['
+    };
+
+    for(const char of str) {
+      if(['(','{','['].includes(char)) {
+        stack.push(char);
+      } else if(map[char]) {
+        if(stack.isEmpty() || stack.pop() !== map[char]) {
+          return false;
+        }
+      }
+    }
+
+    return stack.isEmpty();
+  }
+
   
   // Act as back button in navigation
   const history = new Stack();
