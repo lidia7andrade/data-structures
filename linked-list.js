@@ -36,16 +36,3 @@ newLinkedList.append('Lidia');
 newLinkedList.append('Jorge');
 console.log(newLinkedList);
 
-this.head = lidia, null
-newNode = Jorge, null
-current = lidia, null
-current.next = newNode // Jorge, null
-
-
-newNode = {value:'Rosita', next: null}
-this.head = {
-    value: 'lidia',
-    next: {value:'Jorge', next: null}
-}
-current = current.next // {value:'Jorge', next: null}
-current.next = newNode // {value:'Jorge', next: {value:'Rosita', next: null}}
