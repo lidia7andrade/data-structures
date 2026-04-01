@@ -41,7 +41,26 @@ class AIQueue {
         delete this.items[this.front];
         this.front++;
 
+        // cleanup
+        if(this.front > this.rear / 2) {
+            this.cleanup();
+        }
+
         return item;
+    }
+
+    cleanup() {
+        const newItems = {};
+        let newIndex = 0;
+        
+        for(let i = this.front; i < this.rear; i++) {
+            newItems[newIndex] = this.items[i];
+            newIndex++;
+        }
+        
+        this.items = newItems;
+        this.rear = newIndex;
+        this.front = 0;
     }
 
     peek() {
