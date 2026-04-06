@@ -94,11 +94,14 @@ function toastNotifications() {
 }
 
 
-const queue = new Queue();
+const queue = new AIQueue();
 queue.enqueue('Lidia');
 queue.enqueue('Juan');
+console.log(queue);
 queue.dequeue();
-console.log(queue.peek());
+console.log(queue.items);
 
-toastNotifications();
+// console.log(queue.peek());
+
+// toastNotifications();
 
