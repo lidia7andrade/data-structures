@@ -13,8 +13,10 @@ class HashMap {
         return this.map;
     }
     remove(key) {
-        const {[key]:keyDeleted, ...newMap} = this.map;
-        this.set(newMap);
+        delete this.map[key];
+
+        // const {[key]: keyDeleted, ...newMap} = this.map;
+        // this.map(newMap);
     }
 }
 
@@ -23,7 +25,7 @@ function wordsCounter(text) {
     const newHashMap = new HashMap();
     for (const word of textArray) {
         const wordCounter = newHashMap.get(word);
-        if(wordCounter) {
+        if(wordCounter !== undefined) {
             const counter = wordCounter + 1;
             newHashMap.set(word, counter);
         } else {
@@ -34,27 +36,20 @@ function wordsCounter(text) {
 }
 
 function uniqueCharacter(text) {
-    const textArray = text.split('');
-    const uniqueCharacterMap = new HashMap();
-    const uniqueCharacters = [];
-    for (const character of textArray) {
-        const characterCounter = uniqueCharacterMap.get(character);
-        if(!characterCounter) {
-            uniqueCharacters.push(character);
-            uniqueCharacterMap.set(character, 1);
-        } else {
-            const uniqueCharacterIndex = 
-                uniqueCharacters.findIndex(
-                    (value) => value === character
-                );
-
-            if(uniqueCharacterIndex >= 0) {
-                uniqueCharacters.splice(uniqueCharacterIndex, 1)
-            }
+    const map = new HashMap();
+    // count
+    for(const char of text) {
+        const count = map.get(char) || 0;
+        map.set(char, count + 1);
+    }
+    // find 
+    for(const char of text) {
+        if(map.get(char) === 1) {
+            return char;
         }
     }
-    
-    return uniqueCharacters[0] || 'There is no unique character'
+
+    return null;
 }
 
 function groupByProperty(objectsArray, propertyName) {
@@ -81,3 +76,11 @@ const users = [
     {name:'Catalina', role: 'admin'}
 ];
 console.log(groupByProperty(users, 'role'));
+
+const newHashMap = new HashMap();
+newHashMap.set('A','lidia');
+newHashMap.set('B','juan');
+newHashMap.set('C','jorge');
+console.log(newHashMap.getAll())
+newHashMap.remove('A');
+console.log(newHashMap)
