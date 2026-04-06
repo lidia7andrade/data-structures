@@ -6,16 +6,12 @@ class Node {
     }
 }
 
-
-
 class LinkedList {
     constructor() {
         this.head = null;
         this.tail = null;
         this.size = 0;
     }
-
-    
 
     append(value) {
         const newNode = new Node(value);
@@ -54,30 +50,47 @@ class LinkedList {
 
     find(value) {
         let currentNode = this.head;
-        let valueFounded = false;
         while(currentNode) {
             if(value === currentNode.value) {
-                currentNode = null;
-                valueFounded = true;
-            } else {
-                currentNode = currentNode.next;
-            }
-        }
-        return valueFounded;
-    }
-
-    reverse() {
-        let currentNode = this.head;
-        let nextValue = null;
-        let reverseNodes = currentNode.value;
-        while(currentNode) {
-            if(currentNode.next) {
-                nextValue = currentNode.next.value;
-                reverseNodes = nextValue + ' -> ' + reverseNodes;
+                return true;
             }
             currentNode = currentNode.next;
         }
-        console.log(reverseNodes);
+        return false;
+    }
+
+    reverse() {
+        let prev = null;
+        let current = this.head;
+        // A -> B -> C -> null
+
+        while(current) {
+            // Save next value
+            let next = current.next;
+            // 1. next = {value: 'B', next: {value: 'C', next: null}}
+            // 2. next = {value: 'C', next: null}
+            // 3. next = null
+
+            // Write next value
+            current.next = prev;
+            // 1. current.next = null;
+            // 2. current.next = {value: 'A', next: null}
+            // 3. current.next = {value: 'B', next: {value: 'A', next: null}
+
+            // Save new node in prev varible
+            prev = current;
+            // 1. prev = {value: 'A', next: null}
+            // 2. prev = {value: 'B', next: {value: 'A', next: null}
+            // 3. prev = {value: 'C', next: {value: 'B', next: {value: 'A', next: null}}
+
+            // Go to next node
+            current = next;
+            // 1. current = {value: 'B', next: {value: 'C', next: null}}
+            // 2. current = {value: 'C', next: null}
+            // 3. current = null
+
+        }
+        this.head = prev;
     }
 }
 
@@ -94,3 +107,4 @@ newLinkedList.print();
 
 // Rosita -> Jorge -> Lidia
 newLinkedList.reverse();
+newLinkedList.print();
